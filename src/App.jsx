@@ -6,10 +6,13 @@ import AboutPage from './pages/AboutPage';
 import ProposalsPage from './pages/ProposalsPage';
 import FloatingActionButton from './components/ui/FloatingActionButton';
 import PWAInstallPrompt from './components/ui/PWAInstallPrompt';
+import RainyBackground from './components/layout/RainyBackground'; // <-- IMPORTADO
 
 function AppLayout() {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    // Se cambia el fondo a transparente para que el fondo 3D sea visible
+    <div className="flex flex-col min-h-screen bg-transparent"> 
+      <RainyBackground /> {/* <-- AÑADIDO EL COMPONENTE DE FONDO 3D */}
       <Header />
       <main className="flex-grow">
         <Outlet />

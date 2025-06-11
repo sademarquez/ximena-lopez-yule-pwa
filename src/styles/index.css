@@ -17,3 +17,14 @@
     height: 100%;
     width: 100%;
 }
+@layer components {
+  .glass-header {
+    @apply bg-white/20 backdrop-blur-lg;
+  }
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  .glass-footer {
+    @apply bg-brand-blue/50 backdrop-blur-lg;
+  }
+}

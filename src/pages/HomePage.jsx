@@ -52,14 +52,15 @@ function HomePage() {
         variants={cardVariants}
         className="container mx-auto px-4 -mt-20 relative z-20"
       >
-        <div className="bg-white rounded-lg shadow-xl p-8 md:flex items-center gap-8">
+        {/* Se aplica el nuevo estilo de cristal */}
+        <div className="glass-card text-white rounded-lg shadow-xl p-8 md:flex items-center gap-8">
             <UserCheck className="w-16 h-16 text-brand-green mx-auto md:mx-0 mb-4 md:mb-0"/>
             <div>
-                <h2 className="text-2xl font-bold mb-2">Ximena López Yule: Liderazgo y Compromiso</h2>
-                <p className="text-gray-600">
+                <h2 className="text-2xl font-bold mb-2 !text-white">Ximena López Yule: Liderazgo y Compromiso</h2>
+                <p className="text-gray-300">
                 Líder social y defensora de Derechos Humanos, formada en Derecho y Filosofía. Mi vida ha sido dedicada a acompañar a las víctimas del conflicto. Ahora, busco llevar esa lucha y esa voz al corazón de la democracia colombiana.
                 </p>
-                <Link to="/sobre-ximena" className="text-brand-green font-semibold mt-4 inline-flex items-center gap-2 hover:underline">
+                <Link to="/sobre-ximena" className="text-brand-orange font-semibold mt-4 inline-flex items-center gap-2 hover:underline">
                     Mi Historia <ArrowRight size={18}/>
                 </Link>
             </div>
@@ -74,17 +75,17 @@ function HomePage() {
         variants={cardVariants}
         className="container mx-auto px-4"
       >
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 text-white">
             <h2 className="text-3xl font-bold flex items-center justify-center gap-3"><ShieldAlert size={32}/> Mapa de Alertas Ciudadanas</h2>
-            <p className="text-gray-600 mt-2">Información en tiempo real para proteger a nuestra gente. Reporta y mantente informado.</p>
+            <p className="text-gray-300 mt-2">Información en tiempo real para proteger a nuestra gente. Reporta y mantente informado.</p>
         </div>
         <MapComponent />
       </motion.section>
 
       {/* Propuestas Clave */}
-      <section className="bg-gray-100 py-16">
+      <section className="bg-transparent py-16">
         <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold flex items-center justify-center gap-3"><Megaphone size={32}/> Nuestras Propuestas</h2>
+            <h2 className="text-3xl font-bold flex items-center justify-center gap-3 !text-white"><Megaphone size={32}/> Nuestras Propuestas</h2>
             <div className="grid md:grid-cols-3 gap-8 mt-10">
                 {[
                   { title: "Derechos de las Víctimas", description: "Garantizar la reparación integral y el acceso a la justicia para todas las víctimas del conflicto." },
@@ -97,11 +98,12 @@ function HomePage() {
                       whileInView="onscreen"
                       viewport={{ once: true, amount: 0.5 }}
                       variants={cardVariants}
-                      className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow border-t-4 border-brand-green"
+                      // Se aplica el nuevo estilo de cristal
+                      className="glass-card text-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow border-t-4 border-brand-orange"
                     >
-                        <CheckCircle className="w-10 h-10 text-brand-green mx-auto mb-4"/>
-                        <h3 className="font-bold text-xl text-brand-green mb-2">{item.title}</h3>
-                        <p className="text-gray-600">{item.description}</p>
+                        <CheckCircle className="w-10 h-10 text-brand-orange mx-auto mb-4"/>
+                        <h3 className="font-bold text-xl text-brand-orange mb-2">{item.title}</h3>
+                        <p className="text-gray-300">{item.description}</p>
                     </motion.div>
                 ))}
             </div>

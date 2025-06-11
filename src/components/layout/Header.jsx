@@ -13,7 +13,8 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-md">
+    // Se aplica el nuevo estilo de cristal
+    <header className="glass-header sticky top-0 z-50 shadow-md">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
           <img src="/src/assets/images/logo-ximena.svg" alt="Logo Ximena López" className="h-10 w-10" />
@@ -27,7 +28,7 @@ function Header() {
               to={item.path}
               className={({ isActive }) =>
                 `font-semibold transition-colors ${
-                  isActive ? 'text-brand-green' : 'text-gray-600 hover:text-brand-green'
+                  isActive ? 'text-brand-green' : 'text-gray-200 hover:text-white' // Se ajusta el color para mejor contraste
                 }`
               }
             >
@@ -37,7 +38,7 @@ function Header() {
         </nav>
 
         <div className="md:hidden">
-          <button onClick={() => setIsOpen(!isOpen)}>
+          <button onClick={() => setIsOpen(!isOpen)} className="text-white">
             {isOpen ? <X /> : <Menu />}
           </button>
         </div>
@@ -48,7 +49,7 @@ function Header() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-white pb-4"
+          className="md:hidden glass-header pb-4" // También se aplica el estilo de cristal al menú móvil
         >
           <nav className="flex flex-col items-center gap-4">
             {navItems.map((item) => (
@@ -58,7 +59,7 @@ function Header() {
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
                   `font-semibold text-lg ${
-                    isActive ? 'text-brand-green' : 'text-gray-600'
+                    isActive ? 'text-brand-green' : 'text-gray-200'
                   }`
                 }
               >
