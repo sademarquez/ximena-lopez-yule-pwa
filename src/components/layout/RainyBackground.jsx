@@ -5,82 +5,90 @@ const RainyBackground = () => {
   const mountRef = useRef(null);
 
   useEffect(() => {
-    // Escena, cámara y renderizador
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    mountRef.current.appendChild(renderer.domElement);
-    
-    // Creación de partículas
-    const particleCount = 5000;
-    const particles = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
+    let renderer, scene, camera, particleSystem;
+    let animationFrameId;
 
-    const colorGold = new THREE.Color("#FFD700"); // Dorado
-    const colorPurple = new THREE.Color("#8A2BE2"); // Morado
+    const init = () => {
+      // Escena, cámara y renderizador
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      if (mountRef.current) {
+        mountRef.current.appendChild(renderer.domElement);
+      }
 
-    for (let i = 0; i < particleCount; i++) {
-      // Posición inicial aleatoria
-      positions[i * 3] = (Math.random() - 0.5) * 20; // x
-      positions[i * 3 + 1] = Math.random() * 20;      // y
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 20; // z
+      // Creación de la lluvia dorada
+      const particleCount = 7000; // Más partículas para un efecto más denso
+      const particles = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
 
-      // Asignar color (mezcla de morado y dorado)
-      const mixedColor = Math.random() > 0.5 ? colorGold : colorPurple;
-      colors[i * 3] = mixedColor.r;
-      colors[i * 3 + 1] = mixedColor.g;
-      colors[i * 3 + 2] = mixedColor.b;
-    }
+      const colorGold = new THREE.Color("#FFD700");
 
-    particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 30; // x
+        positions[i * 3 + 1] = Math.random() * 20;      // y
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 20; // z
+      }
 
-    const particleMaterial = new THREE.PointsMaterial({
-      size: 0.03,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.7
-    });
+      particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-    const particleSystem = new THREE.Points(particles, particleMaterial);
-    scene.add(particleSystem);
+      const particleMaterial = new THREE.PointsMaterial({
+        color: colorGold,
+        size: 0.02,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending, // Efecto de brillo cuando se superponen
+      });
 
-    camera.position.z = 5;
+      particleSystem = new THREE.Points(particles, particleMaterial);
+      scene.add(particleSystem);
 
-    // Animación de la lluvia
+      camera.position.z = 10;
+    };
+
+    // Animación
     const animate = () => {
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
+
+      if (!particleSystem || !renderer || !scene || !camera) return;
 
       const positions = particleSystem.geometry.attributes.position.array;
-      for (let i = 0; i < particleCount; i++) {
+      for (let i = 0; i < positions.length; i += 3) {
         // Mover partícula hacia abajo
-        positions[i * 3 + 1] -= 0.01;
+        positions[i + 1] -= 0.015;
 
         // Si la partícula sale por abajo, la reposicionamos arriba
-        if (positions[i * 3 + 1] < -10) {
-          positions[i * 3 + 1] = 10;
+        if (positions[i + 1] < -10) {
+          positions[i + 1] = 10;
         }
       }
       particleSystem.geometry.attributes.position.needsUpdate = true;
       
+      // Rotación sutil para dar más profundidad
+      particleSystem.rotation.y += 0.0001;
+
       renderer.render(scene, camera);
     };
-    animate();
 
     // Manejar redimensionamiento de la ventana
     const handleResize = () => {
+      if (!camera || !renderer) return;
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
+    
+    init();
+    animate();
     window.addEventListener('resize', handleResize);
 
     // Limpieza al desmontar el componente
     return () => {
       window.removeEventListener('resize', handleResize);
-      if (mountRef.current) {
+      cancelAnimationFrame(animationFrameId);
+      if (mountRef.current && renderer) {
         mountRef.current.removeChild(renderer.domElement);
       }
     };

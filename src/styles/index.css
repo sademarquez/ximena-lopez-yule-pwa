@@ -6,10 +6,13 @@
 
 @layer base {
   body {
-    @apply bg-gray-100 text-gray-800 antialiased;
+    /* Se aplica un fondo de gradiente morado oscuro */
+    background-color: #0d061f;
+    background-image: linear-gradient(180deg, #1a0c2e 0%, #0d061f 100%);
+    @apply text-gray-200 antialiased;
   }
   h1, h2, h3 {
-    @apply font-serif text-brand-blue;
+    @apply font-serif;
   }
 }
 
@@ -17,14 +20,18 @@
     height: 100%;
     width: 100%;
 }
+
 @layer components {
   .glass-header {
-    @apply bg-white/20 backdrop-blur-lg;
+    /* Cristal con un tinte morado sutil */
+    @apply bg-purple-900/10 backdrop-blur-lg;
   }
   .glass-card {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
+    /* Cristal más pronunciado para las tarjetas */
+    @apply bg-purple-950/20 backdrop-blur-md border border-white/10;
   }
   .glass-footer {
-    @apply bg-brand-blue/50 backdrop-blur-lg;
+    /* Un cristal más oscuro y sólido para el pie de página */
+    @apply bg-purple-950/50 backdrop-blur-lg;
   }
 }
