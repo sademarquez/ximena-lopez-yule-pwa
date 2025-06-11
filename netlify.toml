@@ -1,0 +1,12 @@
+# Manual de instrucciones para el despliegue en Netlify
+
+[build]
+  # Comando que Netlify debe ejecutar para construir el sitio
+  command = "npm run build"
+
+  # Carpeta que Netlify debe publicar después de construir
+  publish = "dist"
+
+[build.environment]
+  # Versión de Node.js recomendada para proyectos de Vite
+  NODE_VERSION = "18"
