@@ -6,13 +6,23 @@
 
 @layer base {
   body {
-    /* Se aplica un fondo de gradiente morado oscuro */
-    background-color: #0d061f;
-    background-image: linear-gradient(180deg, #1a0c2e 0%, #0d061f 100%);
-    @apply text-gray-200 antialiased;
+    /* Fondo noche profundo */
+    background-color: theme('colors.brand-purple.night');
+    background-image: linear-gradient(180deg, theme('colors.brand-purple.deep') 0%, theme('colors.brand-purple.night') 100%);
+    @apply text-gray-300 antialiased;
   }
-  h1, h2, h3 {
-    @apply font-serif;
+
+  /* Estilo base para los textos dorados */
+  h1, h2, h3, .text-gold {
+    @apply font-serif text-brand-gold;
+  }
+  
+  /* Efecto de brillo en enlaces y elementos interactivos dorados */
+  a.text-gold, button.text-gold {
+    @apply transition-all duration-300;
+  }
+  a.text-gold:hover, button.text-gold:hover {
+    @apply text-brand-gold-light drop-shadow-gold-glow;
   }
 }
 
@@ -21,17 +31,16 @@
     width: 100%;
 }
 
+/* Clases para los objetos transparentes (Glassmorphism) */
 @layer components {
   .glass-header {
-    /* Cristal con un tinte morado sutil */
-    @apply bg-purple-900/10 backdrop-blur-lg;
+    @apply bg-brand-purple-dark/10 backdrop-blur-lg;
   }
   .glass-card {
-    /* Cristal más pronunciado para las tarjetas */
-    @apply bg-purple-950/20 backdrop-blur-md border border-white/10;
+    @apply bg-brand-purple-deep/20 backdrop-blur-md border border-white/10;
   }
   .glass-footer {
     /* Un cristal más oscuro y sólido para el pie de página */
-    @apply bg-purple-950/50 backdrop-blur-lg;
+    @apply bg-brand-purple-deep/50 backdrop-blur-lg;
   }
 }
