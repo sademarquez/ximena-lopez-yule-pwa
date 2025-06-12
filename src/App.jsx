@@ -4,6 +4,7 @@ import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ProposalsPage from './pages/ProposalsPage';
+import EventsPage from './pages/EventsPage'; // <-- IMPORTADO
 import FloatingActionButton from './components/ui/FloatingActionButton';
 import PWAInstallPrompt from './components/ui/PWAInstallPrompt';
 import RainyBackground from './components/layout/RainyBackground';
@@ -31,6 +32,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="sobre-ximena" element={<AboutPage />} />
           <Route path="propuestas" element={<ProposalsPage />} />
+          <Route path="eventos" element={<EventsPage />} /> {/* <-- AÑADIDO */}
         </Route>
       </Routes>
     </Router>
