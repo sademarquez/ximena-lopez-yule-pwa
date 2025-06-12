@@ -50,7 +50,7 @@ const NotificationSubscribe = () => {
       navigator.serviceWorker.ready.then(registration => {
         const subscribeOptions = {
           userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(BLByH3QOwovQdqj19jYpjwmFWBLE6P3v-JgK8Wfiry3vWMpoTWCCLQxwVJ5HXG6MbfRB-pE11UlihyqkXgYdNGk)
+          applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
         };
         registration.pushManager.subscribe(subscribeOptions).then(pushSubscription => {
           console.log('Suscripción exitosa. Guarda este objeto para enviar notificaciones:');
