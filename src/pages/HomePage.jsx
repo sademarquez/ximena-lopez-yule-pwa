@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import MapComponent from '../components/map/MapComponent';
-import { ShieldAlert, Megaphone, UserCheck, CheckCircle, ArrowRight } from 'lucide-react';
+import { ShieldAlert, Megaphone, UserCheck, CheckCircle, ArrowRight, Edit } from 'lucide-react'; // Se añade el icono Edit
 import { Link } from 'react-router-dom';
 
 const cardVariants = {
@@ -17,6 +17,9 @@ const cardVariants = {
 };
 
 function HomePage() {
+  // ¡¡ACCIÓN IMPORTANTE!! Pega aquí el enlace corto de tu formulario de Google
+  const googleFormUrl = "https://forms.gle/DhUZCEMCMQ4HZatCA";
+
   return (
     <div className="space-y-16 md:space-y-24 pb-16">
       {/* Hero Section */}
@@ -28,7 +31,7 @@ function HomePage() {
           transition={{ duration: 0.8 }}
           className="relative z-10 text-center p-4"
         >
-          <h1 className="text-4xl md:text-6xl font-bold !text-brand-gold drop-shadow-gold-glow-lg">Seré la voz de las víctimas en el Congreso</h1>
+          <h1 className="text-4xl md:text-6xl font-bold font-serif !text-brand-gold drop-shadow-gold-glow-lg">Seré la voz de las víctimas en el Congreso</h1>
           <p className="max-w-3xl mx-auto text-lg md:text-xl mt-4 text-gray-300 drop-shadow-md">
             Construyendo un futuro de paz, justicia y oportunidades para el Alto Patía Norte del Cauca.
           </p>
@@ -77,11 +80,28 @@ function HomePage() {
         <div className="text-center mb-8">
             <h2 className="text-3xl font-bold flex items-center justify-center gap-3 text-gold"><ShieldAlert size={32}/> Mapa de Alertas Ciudadanas</h2>
             <p className="text-gray-400 mt-2">Información en tiempo real para proteger a nuestra gente. Reporta y mantente informado.</p>
+            {/* --- INICIO DEL NUEVO CÓDIGO --- */}
+            <a 
+              href={googleFormUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="mt-6 inline-block"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-brand-gold text-brand-purple-night font-bold py-3 px-6 rounded-lg shadow-lg flex items-center gap-2 transition-transform"
+              >
+                <Edit size={20} />
+                Reportar una Alerta
+              </motion.button>
+            </a>
+            {/* --- FIN DEL NUEVO CÓDIGO --- */}
         </div>
         <MapComponent />
       </motion.section>
 
-      {/* Propuestas Clave */}
+      {/* Propuestas Clave (sin cambios) */}
       <section className="bg-transparent py-16">
         <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold flex items-center justify-center gap-3 text-gold"><Megaphone size={32}/> Nuestras Propuestas</h2>
